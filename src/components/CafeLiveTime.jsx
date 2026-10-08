@@ -155,3 +155,4 @@ export default function CafeLiveTime({ variant = "header", className = "" }) {
     </div>
   );
 }
+

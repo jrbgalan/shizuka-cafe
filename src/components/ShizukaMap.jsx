@@ -6,10 +6,10 @@ import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 // Shop Roastery Coordinates: Poblacion, Makati City, Metro Manila
-export const ROASTERY_COORDS = [14.5649, 121.0315];
+const ROASTERY_COORDS = [14.5649, 121.0315];
 
 // Preset Delivery Hubs in Metro Manila for interactive testing
-export const DELIVERY_PRESETS = [
+const DELIVERY_PRESETS = [
   { name: "Poblacion (Local)", city: "Makati City", district: "Poblacion", coords: [14.5649, 121.0315], address: "12 Lantern Lane, Poblacion" },
   { name: "Makati CBD / Legazpi", city: "Makati City", district: "Legazpi Village", coords: [14.5547, 121.0185], address: "Legazpi Village, Makati" },
   { name: "BGC / High Street", city: "Taguig City", district: "Bonifacio Global City", coords: [14.5515, 121.0494], address: "Bonifacio High Street, BGC" },
@@ -21,7 +21,7 @@ export const DELIVERY_PRESETS = [
 ];
 
 // Calculate distance in kilometers using Haversine formula
-export function calculateDistanceKm([lat1, lon1], [lat2, lon2]) {
+function calculateDistanceKm([lat1, lon1], [lat2, lon2]) {
   const R = 6371; // Earth's radius in km
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
   const dLon = ((lon2 - lon1) * Math.PI) / 180;
