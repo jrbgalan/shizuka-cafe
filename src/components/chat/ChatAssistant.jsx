@@ -33,7 +33,10 @@ function loadStoredMessages() {
 }
 
 export default function ChatAssistant() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(() => {
+    if (typeof window !== "undefined" && window.location.search.includes("chat=open")) return true;
+    return false;
+  });
   const [messages, setMessages] = useState(loadStoredMessages);
   const [isStreaming, setIsStreaming] = useState(false);
   const launcherRef = useRef(null);

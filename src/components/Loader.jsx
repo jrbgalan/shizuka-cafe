@@ -4,7 +4,10 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 // Rice-paper field, ensō progress ring, soft lift loading screen.
 // Plays on page refresh and initial load.
 export default function Loader() {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(() => {
+    if (typeof window !== "undefined" && window.location.search.includes("no-loader")) return false;
+    return true;
+  });
   const [progress, setProgress] = useState(0);
   const reduce = useReducedMotion();
 
