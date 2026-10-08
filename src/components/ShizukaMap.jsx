@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { MapPin, Navigation, Compass, ExternalLink, Clock, Check } from "lucide-react";
 import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
