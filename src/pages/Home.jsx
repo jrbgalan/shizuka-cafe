@@ -166,10 +166,14 @@ function GalleryStrip() {
     <section className="bg-zen-paper">
       <div className="mx-auto max-w-[1400px] px-6 py-22 md:px-10 md:py-30">
         <SectionHeading eyebrow="The room" title="A space for stillness" jp="空間" align="center" className="mx-auto max-w-2xl" />
-        <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-4">
+        <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4">
           {gallery.map((g, i) => (
             <ScrollReveal key={g.id} delay={(i % 4) * 0.06}>
-              <ZoomImage label={g.label} alt={g.caption} aspect="aspect-[3/4]" zoom={1.1} />
+              <div className="rounded-2xl border border-zen-hairline/80 bg-zen-surface/60 p-1 shadow-2xs transition-all duration-500 hover:border-zen-clay/60">
+                <div className="overflow-hidden rounded-xl">
+                  <ZoomImage label={g.label} alt={g.caption} aspect="aspect-[3/4]" zoom={1.1} />
+                </div>
+              </div>
             </ScrollReveal>
           ))}
         </div>
@@ -221,30 +225,30 @@ function Testimonials() {
       <div className="mx-auto max-w-[1200px] px-6 py-22 md:px-10 md:py-30 text-center">
         <SectionHeading eyebrow="Kind words" title="From the table" jp="お客様の声" align="center" className="mx-auto max-w-2xl text-zen-paper" />
         
-        {/* Carousel Slide Area with Fade Animation */}
-        <div className="relative mt-12 md:mt-16 min-h-[220px] md:min-h-[190px] flex items-center justify-center">
+        {/* Carousel Slide Area with Fade Animation — Restoring original sizing */}
+        <div className="relative mt-10 md:mt-12 min-h-[140px] md:min-h-[120px] flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={t.id}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
-              className="max-w-3xl mx-auto px-4"
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+              className="max-w-2xl mx-auto px-4"
             >
-              <p className="font-heading text-2xl md:text-4xl italic leading-relaxed text-zen-paper/95">
+              <p className="font-heading text-xl italic leading-relaxed text-zen-paper/90">
                 "{t.quote}"
               </p>
-              <footer className="mt-8">
-                <p className="text-base font-medium text-zen-paper tracking-wide">{t.name}</p>
-                <p className="label-eyebrow text-zen-clay mt-1">{t.role}</p>
+              <footer className="mt-6">
+                <p className="text-sm font-medium text-zen-paper tracking-wide">{t.name}</p>
+                <p className="label-eyebrow text-xs text-zen-clay mt-1">{t.role}</p>
               </footer>
             </motion.div>
           </AnimatePresence>
         </div>
 
         {/* Navigation Controls: Chevrons & Dots */}
-        <div className="mt-12 flex items-center justify-center gap-6">
+        <div className="mt-8 flex items-center justify-center gap-5">
           <button
             onClick={prev}
             aria-label="Previous review"
@@ -355,7 +359,11 @@ export default function Home() {
       <section className="bg-zen-paper">
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-6 py-22 md:grid-cols-2 md:items-center md:px-10 md:py-30">
           <ScrollReveal>
-            <ZenImage label="A sakura latte and a yuzu pastry in soft spring light" alt="Seasonal spring menu" aspect="aspect-[4/5]" className="w-full" />
+            <div className="rounded-2xl border border-zen-hairline/80 bg-zen-surface/60 p-1.5 shadow-2xs">
+              <div className="overflow-hidden rounded-xl">
+                <ZenImage label="A sakura latte and a yuzu pastry in soft spring light" alt="Seasonal spring menu" aspect="aspect-[4/5]" className="w-full" />
+              </div>
+            </div>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <div>

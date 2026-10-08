@@ -42,7 +42,7 @@ export default function Cart() {
                   const key = `${i.id}|${i.grind}|${i.size}`;
                   return (
                     <li key={key} className="flex gap-5 py-6">
-                      <ZenImage label={i.imageLabel} alt={i.name} aspect="aspect-square" className="w-24 shrink-0" />
+                      <ZenImage label={i.imageLabel} alt={i.name} aspect="aspect-square" className="w-24 shrink-0 rounded-xl border border-zen-hairline/70 shadow-2xs" />
                       <div className="flex flex-1 flex-col">
                         <div className="flex justify-between gap-4">
                           <div>

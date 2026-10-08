@@ -78,7 +78,7 @@ export default function OrderConfirmation() {
               const key = `${i.id}|${i.grind}|${i.size}`;
               return (
                 <li key={key} className="flex gap-4">
-                  <ZenImage label={i.imageLabel} alt={i.name} aspect="aspect-square" className="w-16 shrink-0" />
+                  <ZenImage label={i.imageLabel} alt={i.name} aspect="aspect-square" className="w-16 shrink-0 rounded-xl border border-zen-hairline/70 shadow-2xs" />
                   <div className="flex flex-1 items-center justify-between gap-4">
                     <div>
                       <p className="font-heading text-sm">{i.name}</p>

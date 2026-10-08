@@ -305,7 +305,7 @@ export default function Checkout() {
                   const key = `${i.id}|${i.grind}|${i.size}`;
                   return (
                     <li key={key} className="flex gap-3">
-                      <ZenImage label={i.imageLabel} alt={i.name} aspect="aspect-square" className="w-16 shrink-0" />
+                      <ZenImage label={i.imageLabel} alt={i.name} aspect="aspect-square" className="w-16 shrink-0 rounded-xl border border-zen-hairline/70 shadow-2xs" />
                       <div className="flex-1">
                         <p className="font-heading text-sm leading-tight">{i.name}</p>
                         <p className="text-xs text-zen-muted">{i.grind} · {i.size} · ×{i.qty}</p>

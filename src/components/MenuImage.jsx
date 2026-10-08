@@ -18,44 +18,31 @@ export default function MenuImage({
 }) {
   const [hasError, setHasError] = useState(false);
 
-  // If image fails or no src provided, render graceful zen fallback
+  // If image fails or no src provided, render graceful zen craft fallback
   if (hasError || !src) {
     return (
       <div
         className={cn(
-          "relative overflow-hidden bg-zen-surface paper-grain flex flex-col justify-between p-6 select-none border border-zen-hairline/40 transition-all duration-500",
+          "relative overflow-hidden rounded-2xl bg-zen-surface paper-grain flex flex-col justify-between p-5 select-none border border-zen-hairline/90 shadow-2xs transition-all duration-500",
           aspect,
           className
         )}
       >
-        {/* Subtle Ensō / Tea bowl background watermark */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-8 pointer-events-none">
-          <svg viewBox="0 0 100 100" className="h-32 w-32 text-zen-charcoal">
-            <circle
-              cx="50"
-              cy="52"
-              r="34"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeDasharray="205 30"
-            />
-          </svg>
-        </div>
+        {/* Traditional Japanese Washi Inset Border */}
+        <div className="absolute inset-2 rounded-xl border border-dashed border-zen-hairline/70 pointer-events-none" />
 
-        {/* Top: Category watermark */}
+        {/* Top: Category watermark & Traditional Hanko Seal */}
         <div className="relative z-10 flex justify-between items-center">
           <span className="label-eyebrow text-zen-clay text-[10px]">
             {category}
           </span>
-          <span className="font-jp text-[10px] text-zen-muted tracking-widest">
-            静か 喫茶
+          <span className="inline-flex items-center justify-center border border-[#A8322D]/60 bg-[#A8322D]/10 text-[#A8322D] text-[9px] font-jp px-1.5 py-0.5 rounded-xs tracking-wider select-none shadow-2xs">
+            静か
           </span>
         </div>
 
         {/* Center: Dish Name in Cormorant Garamond Serif */}
-        <div className="relative z-10 text-center my-auto px-2">
+        <div className="relative z-10 text-center my-auto px-3">
           <h4 className="font-heading text-xl sm:text-2xl text-zen-charcoal tracking-wide leading-snug">
             {name}
           </h4>
@@ -67,27 +54,37 @@ export default function MenuImage({
         </div>
 
         {/* Bottom: Subtle craft accent */}
-        <div className="relative z-10 flex items-center justify-center gap-2 pt-2 border-t border-zen-hairline/30">
-          <span className="h-0.5 w-6 bg-zen-clay/40" />
-          <span className="text-[10px] uppercase tracking-[0.2em] text-zen-muted">
+        <div className="relative z-10 flex items-center justify-center gap-2 pt-2 border-t border-zen-hairline/40">
+          <span className="h-px w-5 bg-zen-clay/60" />
+          <span className="text-[9px] uppercase tracking-[0.25em] text-zen-muted font-medium">
             Shizuka Craft
           </span>
-          <span className="h-0.5 w-6 bg-zen-clay/40" />
+          <span className="h-px w-5 bg-zen-clay/60" />
         </div>
       </div>
     );
   }
 
   return (
-    <div className={cn("relative overflow-hidden bg-zen-surface", aspect, className)}>
-      <img
-        src={src}
-        alt={alt || name}
-        loading={priority ? "eager" : "lazy"}
-        decoding="async"
-        onError={() => setHasError(true)}
-        className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-      />
+    <div
+      className={cn(
+        "relative overflow-hidden rounded-2xl bg-zen-surface/60 border border-zen-hairline/80 p-1 shadow-2xs transition-all duration-500 hover:border-zen-clay/60",
+        aspect,
+        className
+      )}
+    >
+      <div className="relative h-full w-full overflow-hidden rounded-xl">
+        <img
+          src={src}
+          alt={alt || name}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          onError={() => setHasError(true)}
+          className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+        />
+        {/* Subtle Japanese craft hairline edge */}
+        <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/8 pointer-events-none" />
+      </div>
     </div>
   );
 }

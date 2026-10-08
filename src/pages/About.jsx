@@ -37,7 +37,11 @@ export default function About() {
       <section className="bg-zen-surface">
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-6 py-22 md:grid-cols-2 md:items-center md:px-10 md:py-30">
           <ScrollReveal>
-            <ZenImage label="A tranquil bonsai tree in warm morning window light" alt="Zen bonsai plant and tea craft" aspect="aspect-[4/5]" className="w-full" />
+            <div className="rounded-2xl border border-zen-hairline/80 bg-zen-surface/60 p-1.5 shadow-2xs">
+              <div className="overflow-hidden rounded-xl">
+                <ZenImage label="A tranquil bonsai tree in warm morning window light" alt="Zen bonsai plant and tea craft" aspect="aspect-[4/5]" className="w-full" />
+              </div>
+            </div>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <div>

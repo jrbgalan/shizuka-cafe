@@ -89,12 +89,16 @@ export default function JournalArticle() {
       case 'image':
         return (
           <figure key={index} className="my-12">
-            <ZenImage 
-              alt={block.caption || 'Article image'}
-              label={block.label}
-              aspect="aspect-[4/3] md:aspect-[16/9]"
-              className="w-full mb-4"
-            />
+            <div className="rounded-2xl border border-zen-hairline/80 bg-zen-surface/40 p-1 shadow-2xs">
+              <div className="overflow-hidden rounded-xl">
+                <ZenImage 
+                  alt={block.caption || 'Article image'}
+                  label={block.label}
+                  aspect="aspect-[4/3] md:aspect-[16/9]"
+                  className="w-full"
+                />
+              </div>
+            </div>
             {block.caption && (
               <figcaption className="text-center text-sm text-zen-muted mt-4">
                 {block.caption}
@@ -140,13 +144,17 @@ export default function JournalArticle() {
         {/* Cover Image */}
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 mb-16 md:mb-24">
           <ScrollReveal delay={0.2}>
-            <ZenImage 
-              alt={post.title}
-              label={post.coverImageLabel}
-              aspect="aspect-[16/9] md:aspect-[2/1]"
-              className="w-full"
-              priority={true}
-            />
+            <div className="rounded-2xl border border-zen-hairline/80 bg-zen-surface/40 p-1.5 shadow-2xs">
+              <div className="overflow-hidden rounded-xl">
+                <ZenImage 
+                  alt={post.title}
+                  label={post.coverImageLabel}
+                  aspect="aspect-[16/9] md:aspect-[2/1]"
+                  className="w-full"
+                  priority={true}
+                />
+              </div>
+            </div>
           </ScrollReveal>
         </div>
 
@@ -223,13 +231,17 @@ export default function JournalArticle() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                 {relatedPosts.map((relatedPost) => (
                   <article key={relatedPost.id} className="group h-full flex flex-col">
-                    <Link to={`/journal/${relatedPost.slug}`} className="block mb-6 overflow-hidden">
-                      <ZoomImage 
-                        label={relatedPost.coverImageLabel}
-                        alt={relatedPost.title}
-                        aspect="aspect-[4/3]"
-                        className="w-full"
-                      />
+                    <Link to={`/journal/${relatedPost.slug}`} className="block mb-6">
+                      <div className="rounded-2xl border border-zen-hairline/80 bg-zen-surface/60 p-1 shadow-2xs transition-all duration-500 group-hover:border-zen-clay/60">
+                        <div className="overflow-hidden rounded-xl">
+                          <ZoomImage 
+                            label={relatedPost.coverImageLabel}
+                            alt={relatedPost.title}
+                            aspect="aspect-[4/3]"
+                            className="w-full"
+                          />
+                        </div>
+                      </div>
                     </Link>
                     <div className="flex-grow flex flex-col">
                       <div className="mb-3">

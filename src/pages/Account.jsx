@@ -100,7 +100,7 @@ export default function Account() {
                           const key = `${i.id}|${i.grind}|${i.size}`;
                           return (
                             <li key={key} className="flex items-center gap-3">
-                              <ZenImage label={i.imageLabel} alt={i.name} aspect="aspect-square" className="w-12 shrink-0" />
+                              <ZenImage label={i.imageLabel} alt={i.name} aspect="aspect-square" className="w-12 shrink-0 rounded-lg border border-zen-hairline/70 shadow-2xs" />
                               <div>
                                 <p className="text-sm">{i.name}</p>
                                 <p className="text-xs text-zen-muted">{i.grind} · {i.size} · ×{i.qty}</p>

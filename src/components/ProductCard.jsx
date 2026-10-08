@@ -71,10 +71,11 @@ export default function ProductCard({ product, index = 0 }) {
       className="group"
     >
       <div 
-        className="relative overflow-hidden"
+        className="relative overflow-hidden rounded-2xl border border-zen-hairline/80 bg-zen-surface/60 p-1 shadow-2xs transition-all duration-500 group-hover:border-zen-clay/60"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
+        <div className="relative overflow-hidden rounded-xl">
         <Link 
           to={`/shop/${product.slug}`} 
           aria-label={product.name}
@@ -155,6 +156,7 @@ export default function ProductCard({ product, index = 0 }) {
         >
           <Plus className="h-3.5 w-3.5" strokeWidth={1.5} /> Add
         </button>
+        </div>
       </div>
 
       <div className="mt-5 flex items-start justify-between gap-4">

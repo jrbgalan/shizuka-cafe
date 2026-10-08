@@ -113,17 +113,20 @@ export default function ProductDetail() {
             {/* Gallery with swipe and next/prev buttons */}
             <div className="flex flex-col gap-4">
               <div 
-                className="relative overflow-hidden group select-none"
+                className="relative overflow-hidden group select-none rounded-2xl border border-zen-hairline/80 bg-zen-surface/60 p-1.5 shadow-2xs"
                 onTouchStart={handleTouchStart}
                 onTouchEnd={handleTouchEnd}
               >
-                <ZenImage 
-                  src={images[photoIndex]} 
-                  label={`${product.name} angle ${photoIndex + 1}`} 
-                  alt={product.name} 
-                  aspect="aspect-[4/5]" 
-                  priority 
-                />
+                <div className="relative overflow-hidden rounded-xl">
+                  <ZenImage 
+                    src={images[photoIndex]} 
+                    label={`${product.name} angle ${photoIndex + 1}`} 
+                    alt={product.name} 
+                    aspect="aspect-[4/5]" 
+                    priority 
+                  />
+                  {/* Subtle craft hairline edge */}
+                  <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/8 pointer-events-none" />
 
                 {images.length > 1 && (
                   <>
@@ -165,6 +168,7 @@ export default function ProductDetail() {
                     </div>
                   </>
                 )}
+                </div>
               </div>
 
               {/* Thumbnails */}
@@ -176,7 +180,7 @@ export default function ProductDetail() {
                       type="button"
                       onClick={() => setPhotoIndex(i)}
                       className={cn(
-                        "overflow-hidden transition-all duration-300 border-2",
+                        "overflow-hidden rounded-xl transition-all duration-300 border-2",
                         photoIndex === i ? "border-zen-charcoal opacity-100" : "border-transparent opacity-60 hover:opacity-100"
                       )}
                     >
