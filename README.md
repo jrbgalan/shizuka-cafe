@@ -6,7 +6,7 @@
 [![Vite](https://img.shields.io/badge/Vite-8.2-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS%20v4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer%20Motion-11.18-0055FF?style=flat-square&logo=framer&logoColor=white)](https://www.framer.com/motion/)
-[![Leaflet](https://img.shields.io/badge/Leaflet-1.9-199900?style=flat-square&logo=leaflet&logoColor=white)](https://leafletjs.com/)
+[![Google Maps](https://img.shields.io/badge/Google%20Maps-Zero%20API%20Key-4285F4?style=flat-square&logo=googlemaps&logoColor=white)](https://maps.google.com/)
 [![TypeScript Ready](https://img.shields.io/badge/TypeScript-Strict%20Types-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
 ---
@@ -48,8 +48,8 @@ The digital experience is crafted around the Japanese aesthetic concept of **Ma*
 - **Pluggable Architecture**: Easily swaps to a live LLM backend (OpenAI, Gemini, Anthropic) via `VITE_CHAT_MODE=live`.
 
 ### 4. Interactive Location & Delivery Mapping (`/visit`)
-- **Interactive OpenStreetMap / Leaflet**: Custom-styled map showing the roastery sanctuary in Poblacion, Makati with custom markers and popups.
-- **Delivery Coverage Visualizer**: Toggleable radius rings demonstrating express 45-minute bicycle courier zones and Metro Manila delivery coverage.
+- **Interactive Google Maps (Zero API Key)**: Official responsive Google Maps embed showing the roastery sanctuary in Poblacion, Makati with Roadmap/Satellite toggles, directions routing, and Metro Manila delivery hub selectors.
+- **Delivery Coverage Visualizer**: Interactive delivery hubs calculating distance and courier dispatch duration across Metro Manila.
 
 ### 5. Editorial Journal & Brewing Guides (`/journal`)
 - **Rich Articles**: Deep dives into green coffee sourcing, single-origin processing, water chemistry, and tea rituals.
@@ -72,7 +72,7 @@ The digital experience is crafted around the Japanese aesthetic concept of **Ma*
 | **Styling & Design System** | [Tailwind CSS v4](https://tailwindcss.com/) with custom Japanese aesthetic tokens & typography |
 | **Motion & Gestures** | [Framer Motion 11](https://www.framer.com/motion/) (orchestrated layout animations, presence, gesture drag) |
 | **Routing** | [React Router DOM v6](https://reactrouter.com/) (declarative routing, scroll restoration, route guards) |
-| **Mapping & Geospatial** | [Leaflet](https://leafletjs.com/) & [React-Leaflet](https://react-leaflet.js.org/) over [OpenStreetMap](https://www.openstreetmap.org/) tiles |
+| **Mapping & Geospatial** | [Google Maps](https://maps.google.com/) (Zero API Key Embed) with Satellite toggles & courier routing |
 | **Icons & Art** | [Lucide React](https://lucide.dev/), handcrafted SVGs, and Unsplash Culinary Photography API |
 | **Data & State Management** | React Context (`CartContext`, `CurrencyContext`, `AuthContext`) + TanStack Query |
 | **Utilities** | `date-fns` (localized date formatting), `canvas-confetti`, `clsx`, `tailwind-merge` |
@@ -93,7 +93,7 @@ shizuka-cafe/
 │   │   ├── MenuImage.jsx       # Dish photo component with zen craft fallback
 │   │   ├── MenuItemDialog.jsx  # Accessible dish modal / bottom sheet
 │   │   ├── PaymentIcons.jsx    # Vector payment provider badges
-│   │   ├── ShizukaMap.jsx      # Leaflet interactive map component
+│   │   ├── ShizukaMap.jsx      # Google Maps interactive component (zero API key)
 │   │   ├── ZenImage.jsx        # Ambient image frame with subtle grain
 │   │   └── ZoomImage.jsx       # Smooth hover-zoom container
 │   ├── context/                # Global React contexts (Cart, Currency)
@@ -119,7 +119,7 @@ shizuka-cafe/
 │   │   ├── ProductDetail.jsx   # Bean tasting notes, roast meter, photo swiper
 │   │   ├── Journal.jsx         # Editorial articles & brewing guides
 │   │   ├── JournalArticle.jsx  # Rich article reader with pull quotes
-│   │   ├── Visit.jsx           # Location, transit hints, interactive Leaflet map
+│   │   ├── Visit.jsx           # Location, transit hints, interactive Google Maps
 │   │   ├── Reservations.jsx    # Table booking experience
 │   │   ├── Cart.jsx            # Detailed shopping cart review
 │   │   ├── Checkout.jsx        # Step-by-step guest checkout flow
