@@ -26,6 +26,8 @@ function HeroLogo() {
   const y = useTransform(scrollYProgress, [0, 1], [0, -140]);
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
+  const brandLetters = ["S", "h", "i", "z", "u", "k", "a"];
+
   return (
     <section ref={ref} className="relative h-screen min-h-[640px] w-full overflow-hidden">
       <div className="absolute inset-0">
@@ -42,50 +44,102 @@ function HeroLogo() {
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-zen-paper">
         <motion.p
-          className="label-eyebrow text-zen-paper/80"
-          initial={{ opacity: 0, y: 12 }}
+          className="label-eyebrow text-zen-paper/85 tracking-[0.25em]"
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.4, 0, 0.2, 1], delay: 0.2 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
         >
           Café & Zakka & Coffee Roastery
         </motion.p>
 
         <motion.div
           style={reduce ? undefined : { scale, y, opacity }}
-          className="mt-6"
+          className="relative mt-6 max-w-5xl mx-auto"
         >
-          <motion.h1
-            className="font-heading text-7xl leading-none text-zen-paper md:text-[10rem]"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1], delay: 0.3 }}
+          {/* Subtle rotating Ensō watermark background halo like Onyx's ambient 3D glow */}
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10"
+            initial={{ scale: 0.85, opacity: 0 }}
+            animate={{ scale: 1, opacity: 0.18 }}
+            transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
           >
-            Shizuka
-          </motion.h1>
-          <motion.p
-            className="mt-4 font-jp text-lg tracking-[0.5em] text-zen-paper/85 md:text-2xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1], delay: 0.6 }}
-          >
-            静か · 珈琲
-          </motion.p>
+            <svg
+              viewBox="0 0 100 100"
+              className="h-72 w-72 md:h-[460px] md:w-[460px] text-zen-paper animate-spin-slow"
+              aria-hidden="true"
+            >
+              <circle
+                cx="50"
+                cy="52"
+                r="34"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeDasharray="205 30"
+              />
+            </svg>
+          </motion.div>
+
+          {/* Onyx-style Split-Text kinetic reveal */}
+          <h1 className="relative font-heading text-7xl leading-none text-zen-paper md:text-[10rem] flex justify-center items-center tracking-[0.04em] md:tracking-[0.08em] select-none">
+            {brandLetters.map((char, index) => (
+              <span key={index} className="inline-block overflow-hidden py-1 px-0.5">
+                <motion.span
+                  className="inline-block transition-transform duration-500 hover:-translate-y-3 cursor-default"
+                  initial={reduce ? { opacity: 1, y: 0 } : { y: "115%", opacity: 0, rotate: index % 2 === 0 ? 1.5 : -1.5 }}
+                  animate={{ y: "0%", opacity: 1, rotate: 0 }}
+                  transition={{
+                    duration: 1.15,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: 0.35 + index * 0.075
+                  }}
+                >
+                  {char}
+                </motion.span>
+              </span>
+            ))}
+          </h1>
+
+          {/* Subtitle with expanding hairlines */}
+          <div className="mt-5 flex items-center justify-center gap-3 sm:gap-5">
+            <motion.span
+              className="h-px w-8 sm:w-16 md:w-24 bg-zen-paper/60 origin-right"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.95 }}
+            />
+            <motion.p
+              className="font-jp text-base sm:text-lg tracking-[0.55em] text-zen-paper/90 md:text-2xl pl-2"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.9 }}
+            >
+              静か · 珈琲
+            </motion.p>
+            <motion.span
+              className="h-px w-8 sm:w-16 md:w-24 bg-zen-paper/60 origin-left"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.95 }}
+            />
+          </div>
         </motion.div>
 
         <motion.p
-          className="mt-10 max-w-md text-zen-paper/85"
-          initial={{ opacity: 0, y: 12 }}
+          className="mt-10 max-w-md text-sm md:text-base text-zen-paper/85 leading-relaxed"
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.4, 0, 0.2, 1], delay: 0.8 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 1.1 }}
         >
           A quiet specialty coffee cafe and roastery. Single-origin beans, brewed slowly, in a room made for lingering.
         </motion.p>
 
         <motion.div
           className="mt-10 flex flex-col gap-4 sm:flex-row"
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.4, 0, 0.2, 1], delay: 1 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 1.25 }}
         >
           <Link to="/shop" className="flex items-center gap-2 bg-zen-paper px-7 py-3.5 text-xs uppercase tracking-[0.25em] text-zen-charcoal transition-colors hover:bg-zen-clay hover:text-zen-paper">
             Shop the roastery <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
@@ -100,7 +154,7 @@ function HeroLogo() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-zen-paper/70"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
       >
         <p className="label-eyebrow text-zen-paper/70">Scroll</p>
       </motion.div>

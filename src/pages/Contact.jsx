@@ -6,6 +6,7 @@ import { site } from "@/data/site";
 import { faqs } from "@/data/content";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ShizukaMap from "@/components/ShizukaMap";
 
 const inputCls = "w-full border border-zen-hairline bg-transparent px-4 py-3 text-sm focus:border-zen-charcoal focus:outline-none";
 
@@ -86,6 +87,13 @@ export default function Contact() {
                   {site.socials.map((s) => (
                     <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="label-eyebrow text-zen-muted hover:text-zen-charcoal link-underline">{s.label}</a>
                   ))}
+                </div>
+
+                {/* Interactive Roastery Location Map */}
+                <div className="mt-8 w-full rounded-2xl border border-zen-hairline/80 bg-zen-surface/60 p-1 shadow-2xs">
+                  <div className="overflow-hidden rounded-xl">
+                    <ShizukaMap mode="shop" className="h-[280px] w-full" />
+                  </div>
                 </div>
               </div>
 

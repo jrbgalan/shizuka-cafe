@@ -123,12 +123,14 @@ export default function OrderConfirmation() {
               <span className="h-2 w-2 rounded-full bg-zen-sage animate-pulse" /> In Transit
             </span>
           </div>
-          <div className="aspect-[16/9] w-full overflow-hidden border border-zen-hairline">
-            <ShizukaMap
-              mode="tracking"
-              selectedCoords={order.delivery?.coords || [14.5515, 121.0494]}
-              className="h-full w-full"
-            />
+          <div className="w-full rounded-2xl border border-zen-hairline/80 bg-zen-surface/60 p-1 shadow-2xs">
+            <div className="overflow-hidden rounded-xl">
+              <ShizukaMap
+                mode="tracking"
+                selectedCoords={order.delivery?.coords || [14.5515, 121.0494]}
+                className="h-[340px] md:h-[400px] w-full"
+              />
+            </div>
           </div>
         </div>
 

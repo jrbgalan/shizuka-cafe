@@ -40,6 +40,7 @@ export default function ShizukaMap({
   selectedCoords = null,
   onLocationSelect = null,
   className = "h-[360px] w-full",
+  containerClassName = "",
   interactive = true,
   deliveryAddress = ""
 }) {
@@ -93,11 +94,21 @@ export default function ShizukaMap({
       attributionControl: false
     });
 
-    // Elegant CartoDB Positron tile layer (clean, serene, warm-light aesthetic)
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+    // Primary: Elegant CartoDB Positron tile layer (clean, serene, warm-light aesthetic)
+    const primaryTiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
       maxZoom: 19,
       subdomains: "abcd"
     }).addTo(map);
+
+    // Fallback: standard OSM if CartoDB tile server is unreachable
+    primaryTiles.on("tileerror", () => {
+      if (!map._hasOsmFallback) {
+        map._hasOsmFallback = true;
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19
+        }).addTo(map);
+      }
+    });
 
     // Group for markers and paths
     const markersGroup = L.layerGroup().addTo(map);
@@ -125,11 +136,26 @@ export default function ShizukaMap({
     }
 
     // Force tile recalculation after layout paints
-    setTimeout(() => {
-      map.invalidateSize();
-    }, 200);
+    const timer1 = setTimeout(() => map.invalidateSize(), 60);
+    const timer2 = setTimeout(() => map.invalidateSize(), 300);
+    const timer3 = setTimeout(() => map.invalidateSize(), 800);
+
+    // ResizeObserver ensures map updates smoothly whenever container changes
+    let ro = null;
+    if (typeof ResizeObserver !== "undefined" && mapContainerRef.current) {
+      ro = new ResizeObserver(() => {
+        if (mapInstanceRef.current) {
+          mapInstanceRef.current.invalidateSize();
+        }
+      });
+      ro.observe(mapContainerRef.current);
+    }
 
     return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+      ro?.disconnect();
       if (mapInstanceRef.current) {
         mapInstanceRef.current.remove();
         mapInstanceRef.current = null;
@@ -288,7 +314,7 @@ export default function ShizukaMap({
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className={cn("flex flex-col gap-3 w-full", mode === "shop" ? "h-full" : "", containerClassName)}>
       {/* Interactive Delivery Presets (in delivery mode) */}
       {mode === "delivery" && (
         <div className="space-y-2">
@@ -321,8 +347,8 @@ export default function ShizukaMap({
       )}
 
       {/* Map Canvas Frame */}
-      <div className={cn("relative overflow-hidden border border-zen-hairline bg-zen-paper paper-grain", className)}>
-        <div ref={mapContainerRef} className="h-full w-full z-0" />
+      <div className={cn("relative overflow-hidden border border-zen-hairline bg-zen-paper paper-grain min-h-[280px] w-full isolate", className)}>
+        <div ref={mapContainerRef} className="h-full w-full z-0 min-h-[280px]" style={{ minHeight: "280px", height: "100%", width: "100%" }} />
 
         {/* Floating controls for Shop Location mode */}
         {mode === "shop" && (

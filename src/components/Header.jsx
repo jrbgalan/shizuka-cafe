@@ -5,6 +5,7 @@ import { Menu, X, ShoppingBag } from "lucide-react";
 import { navLinks, site } from "@/data/site";
 import { useCart } from "@/context/CartContext";
 import { cn } from "@/lib/utils";
+import CafeLiveTime from "@/components/CafeLiveTime";
 
 function BrandMark({ className, sub = true }) {
   return (
@@ -68,7 +69,12 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3.5 sm:gap-5">
+            {/* Live Cafe Time Pill */}
+            <div className="hidden sm:block">
+              <CafeLiveTime variant="header" />
+            </div>
+
             <button
               onClick={openCart}
               aria-label={`Open cart, ${count} items`}
@@ -126,7 +132,8 @@ export default function Header() {
                 </motion.div>
               ))}
             </nav>
-            <div className="px-8 pb-10">
+            <div className="px-8 pb-10 flex flex-col gap-3">
+              <CafeLiveTime variant="inline" />
               <p className="label-eyebrow">{site.tagline}</p>
             </div>
           </motion.div>

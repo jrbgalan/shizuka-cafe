@@ -7,6 +7,7 @@ import { site } from "@/data/site";
 import { gallery } from "@/data/content";
 import { MapPin, Clock, Car, Accessibility } from "lucide-react";
 import ShizukaMap from "@/components/ShizukaMap";
+import CafeLiveTime from "@/components/CafeLiveTime";
 
 export default function Visit() {
   return (
@@ -33,7 +34,13 @@ export default function Visit() {
           <ScrollReveal>
             <Clock className="h-6 w-6 text-zen-clay" strokeWidth={1.25} />
             <h3 className="mt-5 font-heading text-2xl text-zen-charcoal">Opening hours</h3>
-            <div className="mt-5 space-y-2">
+            
+            {/* Real-time Live Roastery Clock & Status */}
+            <div className="mt-5 mb-6">
+              <CafeLiveTime variant="card" />
+            </div>
+
+            <div className="space-y-2">
               {site.hours.map((h) => (
                 <div key={h.day} className="flex justify-between gap-4 text-sm">
                   <span className="text-zen-muted">{h.day}</span>
@@ -49,8 +56,10 @@ export default function Visit() {
             <h3 className="mt-5 font-heading text-2xl text-zen-charcoal">Find us</h3>
             <p className="mt-5 text-zen-muted">{site.address.line1}<br />{site.address.city}, {site.address.region}<br />{site.address.country} {site.address.postcode}</p>
             {/* Interactive Shop Location Map */}
-            <div className="mt-6 aspect-[4/3] w-full overflow-hidden border border-zen-hairline">
-              <ShizukaMap mode="shop" className="h-full w-full" />
+            <div className="mt-6 w-full rounded-2xl border border-zen-hairline/80 bg-zen-surface/60 p-1 shadow-2xs">
+              <div className="overflow-hidden rounded-xl">
+                <ShizukaMap mode="shop" className="h-[320px] w-full" />
+              </div>
             </div>
           </ScrollReveal>
 

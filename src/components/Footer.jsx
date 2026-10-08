@@ -4,6 +4,7 @@ import { ChevronDown } from "lucide-react";
 import { site, navLinks, currencies, languages } from "@/data/site";
 import { PAYMENT_METHODS } from "@/components/PaymentIcons";
 import { useCurrency } from "@/context/CurrencyContext";
+import CafeLiveTime from "@/components/CafeLiveTime";
 
 function Dropdown({ label, value, options, onSelect }) {
   const [open, setOpen] = useState(false);
@@ -161,6 +162,9 @@ export default function Footer() {
         {/* Copyright + policy links */}
         <div className="border-t border-zen-hairline">
           <div className="mx-auto max-w-[1400px] px-6 py-6 text-center md:px-10">
+            <div className="mb-3 flex justify-center">
+              <CafeLiveTime variant="inline" />
+            </div>
             <p className="text-xs text-zen-muted">© 2026 John Romeo Galan — Portfolio Project. Not a real business.</p>
             <p className="mt-2 flex flex-wrap justify-center gap-x-2 gap-y-1 text-xs text-zen-muted">
               <Link to="/privacy" className="hover:text-zen-charcoal">Privacy policy</Link><span>·</span>
