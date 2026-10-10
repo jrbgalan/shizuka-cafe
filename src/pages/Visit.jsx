@@ -12,7 +12,7 @@ import CafeLiveTime from "@/components/CafeLiveTime";
 export default function Visit() {
   return (
     <>
-      <PageHeader eyebrow="Come in" title="Visit us" jp="店舗情報" imageLabel="The cafe entrance with a wooden door and a small sign" />
+      <PageHeader eyebrow="Come in" title="Visit us" jp="店舗情報" />
 
       {/* Interior gallery */}
       <section className="bg-zen-paper">
@@ -29,7 +29,7 @@ export default function Visit() {
       </section>
 
       {/* Hours + location + seating */}
-      <section className="bg-zen-surface">
+      <section id="hours-location" className="bg-zen-surface">
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-6 py-22 md:grid-cols-3 md:px-10 md:py-30">
           <ScrollReveal>
             <Clock className="h-6 w-6 text-zen-clay" strokeWidth={1.25} />

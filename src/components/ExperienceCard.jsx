@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import ZoomImage from "@/components/ZoomImage";
+import JapanesePhotoFrame from "@/components/JapanesePhotoFrame";
 
-// Large hover-zoom photo card (benchmarkcoffee "the experience" style).
-// On hover the image scales ~1.12 over ~0.9s, a soft overlay darkens,
-// and a "check here →" link fades up. Titles render in lowercase.
+// Large hover-zoom photo card (benchmarkcoffee "the experience" style)
+// Encased in an authentic Japanese gold leaf frame with scroll light shine.
 export default function ExperienceCard({ experience, index = 0 }) {
   return (
     <motion.article
@@ -16,14 +16,15 @@ export default function ExperienceCard({ experience, index = 0 }) {
       transition={{ duration: 1, ease: [0.4, 0, 0.2, 1], delay: index * 0.12 }}
       className="group relative"
     >
-      <Link to={experience.href} className="block rounded-2xl border border-zen-hairline/80 bg-zen-surface/60 p-1 shadow-2xs transition-all duration-500 hover:border-zen-clay/60">
-        <div className="relative overflow-hidden rounded-xl">
+      <JapanesePhotoFrame className="transition-all duration-500 hover:scale-[1.01]">
+        <Link to={experience.href} className="block relative h-full w-full">
           <ZoomImage
             label={experience.imageLabel}
             alt={experience.title}
             aspect="aspect-[3/4] md:aspect-[4/5]"
             zoom={1.12}
             duration={0.9}
+            framed={false}
           />
           {/* Fixed overlay — darkens on hover */}
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-zen-espresso/80 via-zen-espresso/20 to-transparent transition-opacity duration-700 group-hover:from-zen-espresso/90" />
@@ -37,8 +38,8 @@ export default function ExperienceCard({ experience, index = 0 }) {
               check here <ArrowRight className="h-4 w-4" strokeWidth={1.25} />
             </span>
           </div>
-        </div>
-      </Link>
+        </Link>
+      </JapanesePhotoFrame>
     </motion.article>
   );
 }

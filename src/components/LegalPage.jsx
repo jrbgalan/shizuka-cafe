@@ -24,8 +24,6 @@ export default function LegalPage({ slug }) {
         eyebrow="Legal"
         title={content.title}
         jp="規約"
-        imageLabel="A calm minimal cafe interior with soft light"
-        alt={content.title}
       />
       <section className="bg-zen-paper">
         <div className="mx-auto max-w-[800px] px-6 py-16 md:px-10 md:py-22">

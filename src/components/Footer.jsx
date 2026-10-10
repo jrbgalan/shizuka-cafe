@@ -5,6 +5,8 @@ import { site, navLinks, currencies, languages } from "@/data/site";
 import { PAYMENT_METHODS } from "@/components/PaymentIcons";
 import { useCurrency } from "@/context/CurrencyContext";
 import CafeLiveTime from "@/components/CafeLiveTime";
+import SeigaihaBackground from "@/components/SeigaihaBackground";
+import SeigaihaEdge from "@/components/SeigaihaEdge";
 
 function Dropdown({ label, value, options, onSelect }) {
   const [open, setOpen] = useState(false);
@@ -55,7 +57,8 @@ export default function Footer() {
       </div>
 
       {/* TOP FOOTER — espresso brown, three columns */}
-      <div className="bg-zen-espresso text-zen-paper">
+      <div className="relative bg-zen-espresso text-zen-paper">
+        <SeigaihaEdge direction="up" />
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 divide-y divide-zen-paper/10 md:grid-cols-3 md:divide-x md:divide-y-0">
           <div className="px-6 py-12 md:px-10">
             <p className="label-eyebrow text-zen-clay">Hours</p>
@@ -95,8 +98,9 @@ export default function Footer() {
         </div>
 
         {/* darker band: brand wordmark on left, nav links on right in line with tagline */}
-        <div className="border-t border-zen-paper/10 bg-black/20">
-          <div className="mx-auto flex max-w-[1400px] flex-col gap-6 px-6 py-10 md:flex-row md:items-end md:justify-between md:px-10 md:py-16">
+        <div className="relative overflow-hidden border-t border-zen-paper/10 bg-black/20">
+          <SeigaihaBackground variant="dark" mask="top" />
+          <div className="relative z-10 mx-auto flex max-w-[1400px] flex-col gap-6 px-6 py-10 md:flex-row md:items-end md:justify-between md:px-10 md:py-16">
             <div>
               <h2
                 className="font-heading font-light uppercase text-zen-paper/90"

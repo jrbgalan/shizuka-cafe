@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { getUnsplashImageUrl } from "@/lib/unsplash";
+import JapanesePhotoFrame from "@/components/JapanesePhotoFrame";
 
 // A tranquil, high-resolution image component powered by Unsplash.
 // Automatically matches labels and alts to curated Japanese/Korean café imagery.
@@ -11,10 +12,14 @@ export default function ZenImage({
   alt,
   label,
   className,
+  frameClassName,
   aspect = "aspect-[4/5]",
   overlay = false,
   caption = false,
-  priority = false
+  priority = false,
+  framed = false,
+  showCorners = true,
+  showShine = true,
 }) {
   const text = label || alt || "coffee";
   
@@ -34,14 +39,16 @@ export default function ZenImage({
     setHasFailed(false);
     if (imgRef.current && imgRef.current.complete && imgRef.current.naturalWidth > 0) {
       setIsLoaded(true);
+    } else {
+      setIsLoaded(false);
     }
-  }, [resolvedSrc]);
+  }, [src, resolvedSrc]);
 
   const handleError = () => {
+    // If remote fails, fallback to matched Unsplash URL
     if (!hasFailed) {
       setHasFailed(true);
-      // Safe fallback to general coffee unsplash image
-      setCurrentSrc("https://images.unsplash.com/photo-1559484379-68a6d9c90c73?auto=format&fit=crop&w=1200&q=85");
+      setCurrentSrc(getUnsplashImageUrl(text));
     }
   };
 
@@ -49,28 +56,33 @@ export default function ZenImage({
     setIsLoaded(true);
   };
 
-  return (
-    <div className={cn("relative overflow-hidden bg-zen-surface paper-grain", aspect, className)}>
+  const content = (
+    <div
+      className={cn(
+        "relative overflow-hidden bg-zen-surface paper-grain select-none transition-colors duration-500",
+        aspect,
+        className
+      )}
+    >
       <img
-        ref={(el) => {
-          imgRef.current = el;
-          if (el && el.complete && el.naturalWidth > 0 && !isLoaded) {
-            setIsLoaded(true);
-          }
-        }}
-        key={currentSrc}
+        ref={imgRef}
         src={currentSrc}
         alt={alt || text}
         loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
         decoding="async"
-        onLoad={handleLoad}
         onError={handleError}
-        className="h-full w-full object-cover transition-opacity duration-300 opacity-100 block"
+        onLoad={handleLoad}
+        className={cn(
+          "h-full w-full object-cover transition-all duration-700 ease-zen",
+          // Micro-smooth reveal: no abrupt pops, immediate paint if cached
+          isLoaded ? "opacity-100 scale-100" : "opacity-90 scale-[1.01] blur-2xs"
+        )}
       />
 
-      {/* Gentle placeholder ensō ring visible only while image is downloading */}
-      {!isLoaded && !hasFailed && (
-        <div className="absolute inset-0 flex items-center justify-center bg-zen-surface/40 pointer-events-none transition-opacity duration-300">
+      {/* Gentle placeholder watermark while loading or offline */}
+      {!isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center bg-zen-surface/40 pointer-events-none">
           <svg
             viewBox="0 0 100 100"
             className="h-10 w-10 text-zen-charcoal/15 animate-pulse"
@@ -92,4 +104,19 @@ export default function ZenImage({
       )}
     </div>
   );
+
+  if (framed) {
+    return (
+      <JapanesePhotoFrame
+        aspect={aspect}
+        className={frameClassName}
+        showCorners={showCorners}
+        showShine={showShine}
+      >
+        {content}
+      </JapanesePhotoFrame>
+    );
+  }
+
+  return content;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import PageHeader from "@/components/PageHeader";
 import ScrollReveal from "@/components/ScrollReveal";
+import JapanesePhotoFrame from "@/components/JapanesePhotoFrame";
 import SectionHeading from "@/components/SectionHeading";
 import ZenImage from "@/components/ZenImage";
 import Newsletter from "@/components/Newsletter";
@@ -9,7 +10,7 @@ import { values, timeline } from "@/data/content";
 export default function About() {
   return (
     <>
-      <PageHeader eyebrow="Our story" title="A quiet practice" jp="私たちの物語" imageLabel="A calm empty cafe interior in morning light" />
+      <PageHeader eyebrow="Our story" title="A quiet practice" jp="私たちの物語" />
 
       {/* Philosophy */}
       <section className="bg-zen-paper">
@@ -37,11 +38,9 @@ export default function About() {
       <section className="bg-zen-surface">
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-6 py-22 md:grid-cols-2 md:items-center md:px-10 md:py-30">
           <ScrollReveal>
-            <div className="rounded-2xl border border-zen-hairline/80 bg-zen-surface/60 p-1.5 shadow-2xs">
-              <div className="overflow-hidden rounded-xl">
-                <ZenImage label="A tranquil bonsai tree in warm morning window light" alt="Zen bonsai plant and tea craft" aspect="aspect-[4/5]" className="w-full" />
-              </div>
-            </div>
+            <JapanesePhotoFrame aspect="aspect-[4/5]" className="w-full">
+              <ZenImage label="A tranquil bonsai tree in warm morning window light" alt="Zen bonsai plant and tea craft" aspect="h-full" className="w-full h-full" />
+            </JapanesePhotoFrame>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <div>

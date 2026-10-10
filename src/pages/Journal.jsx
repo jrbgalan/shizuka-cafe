@@ -62,8 +62,6 @@ export default function Journal() {
         eyebrow="Stories & Brewing"
         title="Journal"
         jp="日記"
-        imageLabel="window light through linen"
-        alt="Shizuka Café Journal"
       />
 
       {/* Featured Post (Only show if no search/filter) */}

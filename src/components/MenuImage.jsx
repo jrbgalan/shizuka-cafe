@@ -23,13 +23,13 @@ export default function MenuImage({
     return (
       <div
         className={cn(
-          "relative overflow-hidden rounded-2xl bg-zen-surface paper-grain flex flex-col justify-between p-5 select-none border border-zen-hairline/90 shadow-2xs transition-all duration-500",
+          "relative overflow-hidden rounded-xl bg-zen-surface paper-grain flex flex-col justify-between p-5 select-none h-full w-full",
           aspect,
           className
         )}
       >
         {/* Traditional Japanese Washi Inset Border */}
-        <div className="absolute inset-2 rounded-xl border border-dashed border-zen-hairline/70 pointer-events-none" />
+        <div className="absolute inset-2 rounded-lg border border-dashed border-[#c5a059]/40 pointer-events-none" />
 
         {/* Top: Category watermark & Traditional Hanko Seal */}
         <div className="relative z-10 flex justify-between items-center">
@@ -68,23 +68,21 @@ export default function MenuImage({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-2xl bg-zen-surface/60 border border-zen-hairline/80 p-1 shadow-2xs transition-all duration-500 hover:border-zen-clay/60",
+        "relative h-full w-full overflow-hidden rounded-xl bg-zen-surface/60",
         aspect,
         className
       )}
     >
-      <div className="relative h-full w-full overflow-hidden rounded-xl">
-        <img
-          src={src}
-          alt={alt || name}
-          loading={priority ? "eager" : "lazy"}
-          decoding="async"
-          onError={() => setHasError(true)}
-          className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-        />
-        {/* Subtle Japanese craft hairline edge */}
-        <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/8 pointer-events-none" />
-      </div>
+      <img
+        src={src}
+        alt={alt || name}
+        loading={priority ? "eager" : "lazy"}
+        decoding="async"
+        onError={() => setHasError(true)}
+        className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+      />
+      {/* Subtle craft hairline edge */}
+      <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/8 pointer-events-none" />
     </div>
   );
 }

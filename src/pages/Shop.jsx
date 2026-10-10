@@ -49,7 +49,7 @@ export default function Shop() {
 
   return (
     <>
-      <PageHeader eyebrow="The roastery" title="Coffee beans" jp="珈琲豆" imageLabel="Coffee beans spilling onto a stone surface" />
+      <PageHeader eyebrow="The roastery" title="Coffee beans" jp="珈琲豆" />
 
       <section className="bg-zen-paper">
         <div className="mx-auto max-w-[1400px] px-6 py-22 md:px-10 md:py-30">

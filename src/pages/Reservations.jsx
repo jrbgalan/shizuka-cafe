@@ -71,7 +71,11 @@ export default function Reservations() {
 
   return (
     <>
-      <PageHeader eyebrow="Reservations" title="Reserve a seat" jp="ご予約" imageLabel="A quiet cafe table set for two in soft light" />
+      <PageHeader
+        eyebrow="Table & Counter"
+        title="Reserve a seat"
+        jp="ご予約"
+      />
       <section className="bg-zen-paper">
         <div className="mx-auto max-w-2xl px-6 py-22 md:py-30">
           <ScrollReveal>

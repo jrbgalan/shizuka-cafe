@@ -4,6 +4,7 @@ import { Star, Minus, Plus, Heart, ArrowRight, ChevronLeft, ChevronRight } from 
 import ScrollReveal from "@/components/ScrollReveal";
 import ProductCard from "@/components/ProductCard";
 import ZenImage from "@/components/ZenImage";
+import JapanesePhotoFrame from "@/components/JapanesePhotoFrame";
 import { getProductBySlug, products, grindOptions, sizeOptions } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import { useCurrency } from "@/context/CurrencyContext";
@@ -112,17 +113,22 @@ export default function ProductDetail() {
           <div className="mt-10 grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16">
             {/* Gallery with swipe and next/prev buttons */}
             <div className="flex flex-col gap-4">
-              <div 
-                className="relative overflow-hidden group select-none rounded-2xl border border-zen-hairline/80 bg-zen-surface/60 p-1.5 shadow-2xs"
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
+              <JapanesePhotoFrame 
+                aspect="aspect-[4/5]"
+                className="select-none"
+                innerClassName="relative"
               >
-                <div className="relative overflow-hidden rounded-xl">
+                <div 
+                  className="relative h-full w-full overflow-hidden"
+                  onTouchStart={handleTouchStart}
+                  onTouchEnd={handleTouchEnd}
+                >
                   <ZenImage 
                     src={images[photoIndex]} 
                     label={`${product.name} angle ${photoIndex + 1}`} 
                     alt={product.name} 
-                    aspect="aspect-[4/5]" 
+                    aspect="h-full" 
+                    className="h-full w-full"
                     priority 
                   />
                   {/* Subtle craft hairline edge */}
@@ -169,7 +175,7 @@ export default function ProductDetail() {
                   </>
                 )}
                 </div>
-              </div>
+              </JapanesePhotoFrame>
 
               {/* Thumbnails */}
               {images.length > 1 && (

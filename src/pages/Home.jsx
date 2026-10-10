@@ -5,6 +5,9 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ZenImage from "@/components/ZenImage";
 import ZoomImage from "@/components/ZoomImage";
+import JapanesePhotoFrame from "@/components/JapanesePhotoFrame";
+import SeigaihaBackground from "@/components/SeigaihaBackground";
+import SeigaihaDivider from "@/components/SeigaihaDivider";
 import ScrollReveal from "@/components/ScrollReveal";
 import SectionHeading from "@/components/SectionHeading";
 import ExperienceCard from "@/components/ExperienceCard";
@@ -29,7 +32,7 @@ function HeroLogo() {
   const brandLetters = ["S", "h", "i", "z", "u", "k", "a"];
 
   return (
-    <section ref={ref} className="relative h-screen min-h-[640px] w-full overflow-hidden">
+    <section ref={ref} data-dark-header="true" className="relative h-screen min-h-[640px] w-full overflow-hidden">
       <div className="absolute inset-0">
         <ZenImage
           label="Morning sunlight through cafe window with plants and coffee"
@@ -272,11 +275,14 @@ function Testimonials() {
 
   return (
     <section 
-      className="bg-zen-espresso text-zen-paper overflow-hidden"
+      className="relative bg-zen-espresso text-zen-paper overflow-hidden"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <div className="mx-auto max-w-[1200px] px-6 py-22 md:px-10 md:py-30 text-center">
+      {/* Seigaiha wave background with radial calm center for quote legibility */}
+      <SeigaihaBackground variant="dark" mask="radial-center" />
+
+      <div className="relative z-10 mx-auto max-w-[1200px] px-6 py-22 md:px-10 md:py-30 text-center">
         <SectionHeading eyebrow="Kind words" title="From the table" jp="お客様の声" align="center" className="mx-auto max-w-2xl text-zen-paper" />
         
         {/* Carousel Slide Area with Fade Animation — Restoring original sizing */}
@@ -393,6 +399,8 @@ export default function Home() {
         </div>
       </section>
 
+      <SeigaihaDivider variant="paper" />
+
       <FeaturedMenu />
 
       {/* The Experience */}
@@ -407,17 +415,17 @@ export default function Home() {
         </div>
       </section>
 
+      <SeigaihaDivider variant="paper" />
+
       <FeaturedBeans />
 
       {/* Seasonal specials */}
       <section className="bg-zen-paper">
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-6 py-22 md:grid-cols-2 md:items-center md:px-10 md:py-30">
           <ScrollReveal>
-            <div className="rounded-2xl border border-zen-hairline/80 bg-zen-surface/60 p-1.5 shadow-2xs">
-              <div className="overflow-hidden rounded-xl">
-                <ZenImage label="A sakura latte and a yuzu pastry in soft spring light" alt="Seasonal spring menu" aspect="aspect-[4/5]" className="w-full" />
-              </div>
-            </div>
+            <JapanesePhotoFrame aspect="aspect-[4/5]" className="w-full">
+              <ZenImage label="A sakura latte and a yuzu pastry in soft spring light" alt="Seasonal spring menu" aspect="h-full" className="w-full h-full" />
+            </JapanesePhotoFrame>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <div>
@@ -433,6 +441,9 @@ export default function Home() {
       </section>
 
       <Values />
+
+      <SeigaihaDivider variant="paper" />
+
       <GalleryStrip />
       <Testimonials />
       <Newsletter />

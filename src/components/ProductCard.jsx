@@ -71,7 +71,7 @@ export default function ProductCard({ product, index = 0 }) {
       className="group"
     >
       <div 
-        className="relative overflow-hidden rounded-2xl border border-zen-hairline/80 bg-zen-surface/60 p-1 shadow-2xs transition-all duration-500 group-hover:border-zen-clay/60"
+        className="relative overflow-hidden rounded-2xl bg-zen-surface/40 p-1 shadow-2xs transition-all duration-500 hover:bg-zen-surface/60"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >

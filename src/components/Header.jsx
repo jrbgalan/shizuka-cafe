@@ -1,21 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { navLinks, site } from "@/data/site";
 import { useCart } from "@/context/CartContext";
 import { cn } from "@/lib/utils";
 import CafeLiveTime from "@/components/CafeLiveTime";
 
-function BrandMark({ className, sub = true }) {
+function BrandMark({ className, sub = true, isDark = false }) {
   return (
-    <span className={cn("flex items-center gap-2.5", className)}>
-      <svg viewBox="0 0 100 100" className="h-7 w-7 text-zen-charcoal" aria-hidden="true">
-        <circle cx="50" cy="52" r="34" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeDasharray="205 30" />
+    <span className={cn("flex items-center gap-2.5 transition-colors duration-300", className)}>
+      <svg
+        viewBox="0 0 100 100"
+        className={cn(
+          "h-7 w-7 transition-colors duration-300",
+          isDark ? "text-zen-paper" : "text-zen-charcoal"
+        )}
+        aria-hidden="true"
+      >
+        <circle
+          cx="50"
+          cy="52"
+          r="34"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="5"
+          strokeLinecap="round"
+          strokeDasharray="205 30"
+        />
       </svg>
       <span className="flex flex-col leading-none">
-        <span className="font-heading text-xl tracking-wide text-zen-charcoal">Shizuka</span>
-        {sub && <span className="font-jp text-[10px] tracking-[0.3em] text-zen-muted mt-0.5">静か · 珈琲</span>}
+        <span
+          className={cn(
+            "font-heading text-xl tracking-wide transition-colors duration-300",
+            isDark ? "text-zen-paper" : "text-zen-charcoal"
+          )}
+        >
+          Shizuka
+        </span>
+        {sub && (
+          <span
+            className={cn(
+              "font-jp text-[10px] tracking-[0.3em] mt-0.5 transition-colors duration-300",
+              isDark ? "text-zen-paper/75" : "text-zen-muted"
+            )}
+          >
+            静か · 珈琲
+          </span>
+        )}
       </span>
     </span>
   );
@@ -23,80 +55,136 @@ function BrandMark({ className, sub = true }) {
 
 export default function Header() {
   const location = useLocation();
-  const isHome = location.pathname === "/";
-  const { scrollY } = useScroll();
-  const reduce = useReducedMotion();
   const { count, openCart } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isOverDark, setIsOverDark] = useState(false);
 
-  // Hooks must run unconditionally — compute the scroll-linked values always,
-  // then decide at render whether to apply them (home) or hold visible (inner).
-  const chromeMotion = useTransform(scrollY, [80, 240], [0, 1]);
-  const logoMotion = useTransform(scrollY, [80, 240], [0, 1]);
-  const chromeOpacity = reduce || !isHome ? 1 : chromeMotion;
-  const logoOpacity = reduce || !isHome ? 1 : logoMotion;
+  useEffect(() => {
+    const updateHeaderTheme = () => {
+      // Locate the dark header/hero sentinel element
+      const darkHeader = document.querySelector('[data-dark-header="true"]');
+      if (!darkHeader) {
+        setIsOverDark(false);
+        return;
+      }
+      const rect = darkHeader.getBoundingClientRect();
+      // Site header height is ~72px. While the bottom of the dark header
+      // is below 72px, the site header is positioned over the dark surface.
+      setIsOverDark(rect.bottom > 72);
+    };
+
+    updateHeaderTheme();
+
+    window.addEventListener("scroll", updateHeaderTheme, { passive: true });
+    window.addEventListener("resize", updateHeaderTheme);
+
+    const observer = new MutationObserver(updateHeaderTheme);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      window.removeEventListener("scroll", updateHeaderTheme);
+      window.removeEventListener("resize", updateHeaderTheme);
+      observer.disconnect();
+    };
+  }, [location.pathname]);
 
   return (
     <>
-      <motion.header
-        className="fixed inset-x-0 top-0 z-50"
-      >
-        {/* blurred rice-paper background, fades in on scroll (home) or always (inner) */}
-        <motion.div
-          className="absolute inset-0 -z-10 border-b border-zen-hairline/60 bg-zen-paper/80 backdrop-blur-md"
-          style={{ opacity: reduce ? (isHome ? 1 : 1) : chromeOpacity }}
+      <header className="fixed inset-x-0 top-0 z-50">
+        {/* Blurred rice-paper background when scrolled past dark header, or on light pages */}
+        <div
+          className={cn(
+            "absolute inset-0 -z-10 transition-all duration-300 ease-zen",
+            isOverDark
+              ? "opacity-0 pointer-events-none"
+              : "opacity-100 border-b border-zen-hairline/60 bg-zen-paper/90 backdrop-blur-md"
+          )}
         />
+
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-4 md:px-10 md:py-5">
-          <motion.div style={{ opacity: reduce ? (isHome ? 1 : 1) : logoOpacity }}>
+          <div>
             <Link to="/" aria-label="Shizuka Café — home">
-              <BrandMark />
+              <BrandMark isDark={isOverDark} />
             </Link>
-          </motion.div>
+          </div>
 
           {/* Desktop nav */}
           <nav className="hidden items-center gap-8 lg:flex">
-            {navLinks.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                className={cn(
-                  "label-eyebrow link-underline transition-colors",
-                  location.pathname === l.to ? "text-zen-charcoal" : "text-zen-muted hover:text-zen-charcoal"
-                )}
-              >
-                {l.label}
-              </Link>
-            ))}
+            {navLinks.map((l) => {
+              const isActive = location.pathname === l.to;
+              return (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  className={cn(
+                    "label-eyebrow relative py-1 transition-colors duration-300",
+                    isOverDark
+                      ? isActive
+                        ? "text-zen-paper font-medium"
+                        : "text-zen-paper/85 hover:text-zen-paper"
+                      : isActive
+                        ? "text-zen-charcoal font-medium"
+                        : "text-zen-muted hover:text-zen-charcoal"
+                  )}
+                >
+                  {l.label}
+                  {isActive && (
+                    <span
+                      className={cn(
+                        "absolute -bottom-1 left-0 right-0 h-[2px] transition-colors duration-300",
+                        isOverDark ? "bg-[#C9A96A]" : "bg-zen-charcoal"
+                      )}
+                    />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="flex items-center gap-3.5 sm:gap-5">
             {/* Live Cafe Time Pill */}
             <div className="hidden sm:block">
-              <CafeLiveTime variant="header" />
+              <CafeLiveTime variant="header" isDark={isOverDark} />
             </div>
 
             <button
               onClick={openCart}
               aria-label={`Open cart, ${count} items`}
-              className="relative text-zen-charcoal transition-opacity hover:opacity-60"
+              className={cn(
+                "relative transition-colors duration-300",
+                isOverDark
+                  ? "text-zen-paper hover:text-white"
+                  : "text-zen-charcoal hover:opacity-60"
+              )}
             >
               <ShoppingBag className="h-5 w-5" strokeWidth={1.25} />
               {count > 0 && (
-                <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-zen-charcoal px-1 text-[10px] font-medium text-zen-paper">
+                <span
+                  className={cn(
+                    "absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[10px] font-semibold transition-colors duration-300",
+                    isOverDark
+                      ? "bg-[#C9A96A] text-zen-espresso"
+                      : "bg-zen-charcoal text-zen-paper"
+                  )}
+                >
                   {count}
                 </span>
               )}
             </button>
+
             <button
               onClick={() => setMenuOpen(true)}
               aria-label="Open menu"
-              className="text-zen-charcoal lg:hidden"
+              className={cn(
+                "lg:hidden transition-colors duration-300",
+                isOverDark ? "text-zen-paper hover:text-white" : "text-zen-charcoal"
+              )}
             >
               <Menu className="h-5 w-5" strokeWidth={1.25} />
             </button>
           </div>
         </div>
-      </motion.header>
+      </header>
 
       {/* Mobile full-screen overlay */}
       <AnimatePresence>
@@ -109,8 +197,12 @@ export default function Header() {
             transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           >
             <div className="flex items-center justify-between px-5 py-4">
-              <BrandMark />
-              <button onClick={() => setMenuOpen(false)} aria-label="Close menu" className="text-zen-charcoal">
+              <BrandMark isDark={false} />
+              <button
+                onClick={() => setMenuOpen(false)}
+                aria-label="Close menu"
+                className="text-zen-charcoal"
+              >
                 <X className="h-5 w-5" strokeWidth={1.25} />
               </button>
             </div>

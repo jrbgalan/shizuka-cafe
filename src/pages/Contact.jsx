@@ -30,7 +30,7 @@ export default function Contact() {
 
   return (
     <>
-      <PageHeader eyebrow="Say hello" title="Contact" jp="お問い合わせ" imageLabel="A quiet cafe counter with a small bell and a plant" />
+      <PageHeader eyebrow="Say hello" title="Contact" jp="お問い合わせ" />
 
       <section className="bg-zen-paper">
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-6 py-22 md:grid-cols-2 md:px-10 md:py-30">

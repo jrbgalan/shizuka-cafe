@@ -9,7 +9,7 @@ export default function FAQ() {
 
   return (
     <>
-      <PageHeader eyebrow="Good to know" title="Frequently asked" jp="よくある質問" imageLabel="A quiet corner of the cafe with a book and a cup" />
+      <PageHeader eyebrow="Good to know" title="Frequently asked" jp="よくある質問" />
       <section className="bg-zen-paper">
         <div className="mx-auto max-w-3xl px-6 py-22 md:px-10 md:py-30">
           <div className="divide-y divide-zen-hairline border-y border-zen-hairline">

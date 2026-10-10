@@ -44,6 +44,10 @@
     --zen-espresso: #1A1613;
     --zen-hairline: #D1C7B7;
     --zen-muted: #8C8378;
+    --zen-gold: #C5A059;
+    --zen-gold-bright: #E5CA82;
+    --zen-gold-deep: #967538;
+    --zen-seigaiha: rgba(43, 33, 27, 0.04);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -80,6 +84,18 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+
+    /* Zen palette in dark mode */
+    --zen-paper: #141210;
+    --zen-surface: #1E1B17;
+    --zen-charcoal: #F5F1EA;
+    --zen-clay: #8C8378;
+    --zen-hairline: #2B211B;
+    --zen-muted: #B8A995;
+    --zen-gold: #C5A059;
+    --zen-gold-bright: #E5CA82;
+    --zen-gold-deep: #967538;
+    --zen-seigaiha: rgba(255, 255, 255, 0.035);
   }
 }
 
@@ -116,6 +132,89 @@
   /* Hairline divider */
   .hairline {
     background: var(--zen-hairline);
+  }
+
+  /* Seigaiha responsive tile size (60x30 mobile, 80x40 md, 100x50 xl) */
+  .seigaiha-tile {
+    background-repeat: repeat;
+    background-position: center top;
+    background-size: 60px 30px;
+  }
+  @media (min-width: 768px) {
+    .seigaiha-tile {
+      background-size: 80px 40px;
+    }
+  }
+  @media (min-width: 1440px) {
+    .seigaiha-tile {
+      background-size: 100px 50px;
+    }
+  }
+
+  /* Seigaiha edge responsive tile size (60x60 mobile, 80x80 md+) */
+  .seigaiha-edge-tile {
+    background-repeat: repeat-x;
+    background-position: center top;
+    background-size: 60px 60px;
+  }
+  @media (min-width: 768px) {
+    .seigaiha-edge-tile {
+      background-size: 80px 80px;
+    }
+  }
+
+  .seigaiha-tile-bottom {
+    background-position: center bottom !important;
+  }
+
+  /* Seamless single-tile drift animations (exact tile width per ~60s, transform only) */
+  @keyframes seigaiha-drift-sm {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-60px, 0, 0);
+    }
+  }
+
+  @keyframes seigaiha-drift-md {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-80px, 0, 0);
+    }
+  }
+
+  @keyframes seigaiha-drift-xl {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-100px, 0, 0);
+    }
+  }
+
+  .seigaiha-drift-layer {
+    width: calc(100% + 120px);
+    will-change: transform;
+    animation: seigaiha-drift-sm 60s linear infinite;
+  }
+  @media (min-width: 768px) and (max-width: 1439px) {
+    .seigaiha-drift-layer {
+      animation: seigaiha-drift-md 60s linear infinite;
+    }
+  }
+  @media (min-width: 1440px) {
+    .seigaiha-drift-layer {
+      animation: seigaiha-drift-xl 60s linear infinite;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .seigaiha-drift-layer {
+      animation: none !important;
+      transform: none !important;
+    }
   }
 
   /* Subtle paper grain overlay */

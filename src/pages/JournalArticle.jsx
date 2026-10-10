@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { getPostBySlug, getRelatedPosts, posts } from '@/data/journal';
 import ZenImage from '@/components/ZenImage';
 import ZoomImage from '@/components/ZoomImage';
+import JapanesePhotoFrame from '@/components/JapanesePhotoFrame';
 import ScrollReveal from '@/components/ScrollReveal';
 
 export default function JournalArticle() {
@@ -89,16 +90,14 @@ export default function JournalArticle() {
       case 'image':
         return (
           <figure key={index} className="my-12">
-            <div className="rounded-2xl border border-zen-hairline/80 bg-zen-surface/40 p-1 shadow-2xs">
-              <div className="overflow-hidden rounded-xl">
-                <ZenImage 
-                  alt={block.caption || 'Article image'}
-                  label={block.label}
-                  aspect="aspect-[4/3] md:aspect-[16/9]"
-                  className="w-full"
-                />
-              </div>
-            </div>
+            <JapanesePhotoFrame aspect="aspect-[4/3] md:aspect-[16/9]">
+              <ZenImage 
+                alt={block.caption || 'Article image'}
+                label={block.label}
+                aspect="h-full"
+                className="w-full h-full"
+              />
+            </JapanesePhotoFrame>
             {block.caption && (
               <figcaption className="text-center text-sm text-zen-muted mt-4">
                 {block.caption}
@@ -144,17 +143,15 @@ export default function JournalArticle() {
         {/* Cover Image */}
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 mb-16 md:mb-24">
           <ScrollReveal delay={0.2}>
-            <div className="rounded-2xl border border-zen-hairline/80 bg-zen-surface/40 p-1.5 shadow-2xs">
-              <div className="overflow-hidden rounded-xl">
-                <ZenImage 
-                  alt={post.title}
-                  label={post.coverImageLabel}
-                  aspect="aspect-[16/9] md:aspect-[2/1]"
-                  className="w-full"
-                  priority={true}
-                />
-              </div>
-            </div>
+            <JapanesePhotoFrame aspect="aspect-[16/9] md:aspect-[2/1]">
+              <ZenImage 
+                alt={post.title}
+                label={post.coverImageLabel}
+                aspect="h-full"
+                className="w-full h-full"
+                priority={true}
+              />
+            </JapanesePhotoFrame>
           </ScrollReveal>
         </div>
 

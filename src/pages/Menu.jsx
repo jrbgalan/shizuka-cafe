@@ -98,11 +98,10 @@ export default function Menu() {
         eyebrow="The counter"
         title="Menu"
         jp="お品書き"
-        imageLabel="An overhead view of the cafe counter and pastries"
       />
 
       <section className="bg-zen-paper">
-        <div className="mx-auto max-w-[1400px] px-6 py-16 md:px-10 md:py-24">
+        <div className="mx-auto max-w-[1400px] px-6 pt-7 pb-16 md:px-10 md:pt-12 md:pb-24">
           
           {/* Sticky Category Tabs Bar */}
           <div className="sticky top-20 z-30 bg-zen-paper/95 backdrop-blur-md border-b border-zen-hairline py-4 -mx-6 px-6 md:-mx-10 md:px-10 transition-all">

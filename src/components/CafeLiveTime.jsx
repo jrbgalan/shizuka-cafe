@@ -7,7 +7,7 @@ import { Clock } from "lucide-react";
  * Japanese/Zen aesthetic live café time component
  * Variants: "header" | "card" | "inline"
  */
-export default function CafeLiveTime({ variant = "header", className = "" }) {
+export default function CafeLiveTime({ variant = "header", className = "", isDark = false }) {
   const {
     formattedTime,
     timeWithSeconds,
@@ -24,16 +24,16 @@ export default function CafeLiveTime({ variant = "header", className = "" }) {
 
   // Status indicator colors
   const dotColor = isClosingSoon
-    ? "bg-amber-600"
+    ? (isDark ? "bg-amber-400" : "bg-amber-600")
     : isOpen
-    ? "bg-zen-sage"
-    : "bg-zen-clay";
+    ? (isDark ? "bg-emerald-400" : "bg-zen-sage")
+    : (isDark ? "bg-stone-400" : "bg-zen-clay");
 
   const dotPingColor = isClosingSoon
-    ? "bg-amber-500"
+    ? (isDark ? "bg-amber-400" : "bg-amber-500")
     : isOpen
-    ? "bg-zen-sage"
-    : "bg-zen-clay";
+    ? (isDark ? "bg-emerald-400" : "bg-zen-sage")
+    : (isDark ? "bg-stone-400" : "bg-zen-clay");
 
   if (variant === "header") {
     return (
@@ -42,7 +42,14 @@ export default function CafeLiveTime({ variant = "header", className = "" }) {
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
       >
-        <div className="flex items-center gap-2 rounded-full border border-zen-hairline/70 bg-zen-surface/60 px-2.5 py-1 text-xs backdrop-blur-xs transition-colors hover:border-zen-charcoal/40 shadow-2xs select-none">
+        <div
+          className={cn(
+            "flex items-center gap-2 rounded-full px-2.5 py-1 text-xs backdrop-blur-xs transition-colors shadow-2xs select-none",
+            isDark
+              ? "border border-white/20 bg-white/10 hover:border-white/40 text-zen-paper"
+              : "border border-zen-hairline/70 bg-zen-surface/60 hover:border-zen-charcoal/40 text-zen-charcoal"
+          )}
+        >
           {/* Live pulsing status dot */}
           <span className="relative flex h-2 w-2">
             <span
@@ -55,17 +62,29 @@ export default function CafeLiveTime({ variant = "header", className = "" }) {
           </span>
 
           {/* Time display */}
-          <span className="font-heading text-xs sm:text-sm font-semibold tracking-wide text-zen-charcoal">
+          <span
+            className={cn(
+              "font-heading text-xs sm:text-sm font-semibold tracking-wide transition-colors",
+              isDark ? "text-zen-paper" : "text-zen-charcoal"
+            )}
+          >
             {formattedTime}
           </span>
 
-          <span className="h-2.5 w-px bg-zen-hairline/80" />
+          <span
+            className={cn(
+              "h-2.5 w-px transition-colors",
+              isDark ? "bg-white/25" : "bg-zen-hairline/80"
+            )}
+          />
 
           {/* Status */}
           <span
             className={cn(
-              "text-[10px] uppercase tracking-wider font-medium",
-              isOpen ? "text-zen-charcoal" : "text-zen-muted"
+              "text-[10px] uppercase tracking-wider font-medium transition-colors",
+              isDark
+                ? (isOpen ? "text-zen-paper font-medium" : "text-zen-paper/70")
+                : (isOpen ? "text-zen-charcoal" : "text-zen-muted")
             )}
           >
             {statusText}
