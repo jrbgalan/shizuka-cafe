@@ -16,7 +16,7 @@
  */
 
 /**
- * @typedef {'paper' | 'dark' | 'sage'} SeigaihaVariant
+ * @typedef {'paper' | 'dark' | 'sage' | 'lightGold'} SeigaihaVariant
  */
 
 /**
@@ -41,6 +41,18 @@ export const SEIGAIHA_DARK = {
 };
 
 /**
+ * Master tuning dial for light gold sections (welcome/loader animation on rice paper).
+ * Adjust line, opacity, strokeWidth here in one place.
+ * Over paper (#F5F1EA) this lands around #E5D8B9, a soft warm gold.
+ */
+export const SEIGAIHA_LIGHT_GOLD = {
+  bg: '#F5F1EA',         // Exact zen-paper token
+  line: '#B8912F',       // Deep Chinese gold
+  opacity: 0.26,         // Stroke opacity on paper
+  strokeWidth: 0.8,      // Stroke width in SVG units
+};
+
+/**
  * Standard design token variants for Shizuka Café.
  * @type {Record<SeigaihaVariant, SeigaihaConfig>}
  */
@@ -62,6 +74,12 @@ export const SEIGAIHA_VARIANTS = {
     line: '#6F8269',
     opacity: 0.28,
     strokeWidth: 0.8,
+  },
+  lightGold: {
+    bg: SEIGAIHA_LIGHT_GOLD.bg,
+    line: SEIGAIHA_LIGHT_GOLD.line,
+    opacity: SEIGAIHA_LIGHT_GOLD.opacity,
+    strokeWidth: SEIGAIHA_LIGHT_GOLD.strokeWidth,
   },
 };
 

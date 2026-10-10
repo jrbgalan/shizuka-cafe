@@ -6,11 +6,12 @@ import SeigaihaBackground from "@/components/SeigaihaBackground";
  * Loader Component
  *
  * Welcome screen animation featuring:
- * - Solid dark espresso background (zen-espresso #1A1613, exact footer/header token)
- * - Seamless "dark gold" Seigaiha wave pattern filling the whole screen via SEIGAIHA_DARK
- * - Radial calm zone mask keeping the central ensō ring and brand mark crisp
- * - 0.6s pattern opacity fade-in while the light off-white ensō ring draws
+ * - Solid rice-paper background (zen-paper #F5F1EA, exact site token)
+ * - Seamless light gold Seigaiha wave pattern filling the whole screen via SEIGAIHA_LIGHT_GOLD
+ * - Central radial calm zone mask keeping the central ensō ring and brand mark crisp
+ * - 0.6s pattern opacity fade-in while the dark espresso ensō ring draws
  * - GPU transform-only slow drift (1 tile per ~60s, disabled on prefers-reduced-motion)
+ * - Full WCAG AAA contrast for logo mark and progress ring on light paper
  * - Seamless lift-away exit revealing the underlying page and header
  */
 export default function Loader({ forceShow = false, onComplete }) {
@@ -68,12 +69,12 @@ export default function Loader({ forceShow = false, onComplete }) {
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-zen-espresso overflow-hidden select-none"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-zen-paper paper-grain overflow-hidden select-none"
           initial={{ opacity: 1 }}
           exit={{ y: "-100%" }}
           transition={{ duration: 1.1, ease: [0.4, 0, 0.2, 1] }}
         >
-          {/* Edge-to-edge dark gold Seigaiha pattern fading in over 0.6s with calm center mask */}
+          {/* Edge-to-edge light gold Seigaiha pattern fading in over 0.6s with calm center mask */}
           <motion.div
             className="absolute inset-0 pointer-events-none"
             initial={reduce ? { opacity: 1 } : { opacity: 0 }}
@@ -81,32 +82,32 @@ export default function Loader({ forceShow = false, onComplete }) {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <SeigaihaBackground
-              variant="dark"
+              variant="lightGold"
               mask="radial-center"
               drift={!reduce}
             />
           </motion.div>
 
-          {/* Central Ensō Ring & Brand Mark (light/off-white with high contrast) */}
+          {/* Central Ensō Ring & Brand Mark (dark espresso with full contrast on rice paper) */}
           <div className="relative z-10 flex h-40 w-40 items-center justify-center">
             <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full -rotate-90">
-              {/* Subtle background track */}
+              {/* Subtle hairline background track */}
               <circle
                 cx="50"
                 cy="50"
                 r="46"
                 fill="none"
-                stroke="rgba(245, 241, 234, 0.16)"
+                stroke="#D1C7B7"
                 strokeWidth="0.8"
               />
-              {/* Ensō progress stroke in crisp off-white */}
+              {/* Ensō progress stroke in dark espresso */}
               <circle
                 cx="50"
                 cy="50"
                 r="46"
                 fill="none"
-                stroke="#F5F1EA"
-                strokeWidth="1.5"
+                stroke="#2B211B"
+                strokeWidth="1.6"
                 strokeLinecap="round"
                 strokeDasharray={`${dash} ${circumference}`}
               />
@@ -117,14 +118,14 @@ export default function Loader({ forceShow = false, onComplete }) {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
             >
-              <p className="font-heading text-3xl text-zen-paper leading-none">Shizuka</p>
-              <p className="font-jp text-xs tracking-[0.4em] text-zen-paper/75 mt-2">静か 珈琲</p>
+              <p className="font-heading text-3xl text-zen-charcoal leading-none">Shizuka</p>
+              <p className="font-jp text-xs tracking-[0.4em] text-zen-muted mt-2">静か 珈琲</p>
             </motion.div>
           </div>
 
           {/* Progress / Status label */}
           <motion.p
-            className="relative z-10 label-eyebrow text-[#C9A96A] mt-10 tracking-[0.32em] font-medium"
+            className="relative z-10 label-eyebrow text-zen-muted mt-10 tracking-[0.32em] font-medium"
             initial={reduce ? { opacity: 1 } : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}

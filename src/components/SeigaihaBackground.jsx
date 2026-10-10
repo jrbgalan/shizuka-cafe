@@ -3,7 +3,7 @@ import { getSeigaihaDataUri } from '@/lib/seigaiha';
 import { cn } from '@/lib/utils';
 
 /**
- * @typedef {'paper' | 'dark' | 'sage'} SeigaihaVariant
+ * @typedef {'paper' | 'dark' | 'sage' | 'lightGold'} SeigaihaVariant
  * @typedef {'radial-center' | 'radial' | 'vertical' | 'top' | 'none'} SeigaihaMask
  */
 
@@ -15,8 +15,8 @@ import { cn } from '@/lib/utils';
 function getMaskImage(mask) {
   switch (mask) {
     case 'radial-center':
-      // Gentle calm center: pattern fades to ~18% behind the center text, strongest toward edges
-      return 'radial-gradient(ellipse 80% 70% at 50% 55%, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.42) 52%, black 88%)';
+      // Gentle calm center: pattern fades to ~12% behind the center text/logo, strongest toward edges
+      return 'radial-gradient(ellipse 85% 75% at 50% 50%, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.38) 50%, black 86%)';
     case 'vertical':
       // Top and bottom vertical gradient fade (for section dividers / strips)
       return 'linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%)';
