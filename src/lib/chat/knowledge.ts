@@ -145,7 +145,7 @@ export function getRecommendations(facet: RecommendationFacet): {
     }
 
     case "sweet": {
-      const match = menuItems.find((i) => i.id === "m11") || menuItems.find((i) => i.category === "noncoffee");
+      const match = menuItems.find((i) => i.id === "m11") || menuItems.find((i) => i.category === "pastries" || i.category === "tea");
       return {
         message: "If you are craving a gentle sweetness, the Honey Yuzu Tonic balances bright citrus and raw local honey. Or pair your cup with our thick-cut Nagasaki Castella.",
         item: match ? toMenuItemCardData(match) : undefined,

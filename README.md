@@ -2,12 +2,13 @@
 
 > **Café & Zakka & Coffee Roastery** — A quiet specialty coffee experience and culinary sanctuary inspired by Japanese minimalism and Korean café culture.
 
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8%20Strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18.3-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-8.2-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS%20v4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer%20Motion-11.18-0055FF?style=flat-square&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 [![Google Maps](https://img.shields.io/badge/Google%20Maps-Zero%20API%20Key-4285F4?style=flat-square&logo=googlemaps&logoColor=white)](https://maps.google.com/)
-[![TypeScript Ready](https://img.shields.io/badge/TypeScript-Strict%20Types-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 
 ---
 
@@ -19,6 +20,7 @@ The digital experience is crafted around the Japanese aesthetic concept of **Ma*
 - **Palette**: Rice-paper creams (`zen-paper` `#F5F1EA`), warm tatami surfaces (`zen-surface` `#EBE6DD`), deep roasted espresso tones (`zen-espresso` `#1A1613`), soft charcoal typography (`zen-charcoal` `#2B211B`), and muted earthen accents (`zen-clay`, `zen-sage`).
 - **Typography**: Editorial titles set in *Cormorant Garamond*, geometric clarity in *Jost*, and authentic Japanese typography in *Noto Sans JP* and *Shippori Mincho*.
 - **Motion**: Deliberate, smooth easing `[0.4, 0, 0.2, 1]`, gentle page crossfades, ambient image hover-zooming, and full consideration for accessibility via `prefers-reduced-motion`.
+- **Engineering Quality**: 100% strict **TypeScript** codebase ensuring enterprise-grade reliability, exhaustive component contracts, zero implicit any, and lightning-fast developer feedback.
 
 ---
 
@@ -66,9 +68,9 @@ The digital experience is crafted around the Japanese aesthetic concept of **Ma*
 
 | Category | Technologies |
 | :--- | :--- |
-| **Frontend Framework** | [React 18.3](https://react.dev/) (Functional Components, Hooks, Context API) |
+| **Language & Typing** | [TypeScript 5.8](https://www.typescriptlang.org/) (Strict Mode, 100% Typed Components & Primitives) |
+| **Frontend Framework** | [React 18.3](https://react.dev/) (Functional Components, Strict Hooks, Context API) |
 | **Build & Tooling** | [Vite 8.2](https://vitejs.dev/) with Fast Refresh & Lightning-fast Rollup builds |
-| **Language & Typing** | JavaScript (ESNext) + Strict [TypeScript](https://www.typescriptlang.org/) models (`menuTypes.ts`, `types.ts`, `calendar.ts`) |
 | **Styling & Design System** | [Tailwind CSS v4](https://tailwindcss.com/) with custom Japanese aesthetic tokens & typography |
 | **Motion & Gestures** | [Framer Motion 11](https://www.framer.com/motion/) (orchestrated layout animations, presence, gesture drag) |
 | **Routing** | [React Router DOM v6](https://reactrouter.com/) (declarative routing, scroll restoration, route guards) |
@@ -87,25 +89,30 @@ shizuka-cafe/
 ├── src/
 │   ├── components/             # Reusable UI & design system components
 │   │   ├── chat/               # AI Assistant (Launcher, Panel, MessageRow, Cards)
-│   │   ├── ui/                 # Accessible atomic UI components
-│   │   ├── Header.jsx          # Desktop navigation & mobile drawer
-│   │   ├── Footer.jsx          # Footer links, newsletter, payment badges
-│   │   ├── MenuImage.jsx       # Dish photo component with zen craft fallback
-│   │   ├── MenuItemDialog.jsx  # Accessible dish modal / bottom sheet
-│   │   ├── PaymentIcons.jsx    # Vector payment provider badges
-│   │   ├── ShizukaMap.jsx      # Google Maps interactive component (zero API key)
-│   │   ├── ZenImage.jsx        # Ambient image frame with subtle grain
-│   │   └── ZoomImage.jsx       # Smooth hover-zoom container
-│   ├── context/                # Global React contexts (Cart, Currency)
+│   │   ├── ui/                 # Accessible atomic UI components (52+ typed primitives)
+│   │   ├── Header.tsx          # Desktop navigation & mobile drawer
+│   │   ├── Footer.tsx          # Footer links, newsletter, payment badges
+│   │   ├── PageHeader.tsx      # Editorial header with Seigaiha wave texture
+│   │   ├── MenuImage.tsx       # Dish photo component with zen craft fallback
+│   │   ├── MenuItemDialog.tsx  # Accessible dish modal / bottom sheet
+│   │   ├── PaymentIcons.tsx    # Vector payment provider badges
+│   │   ├── ShizukaMap.tsx      # Google Maps interactive component (zero API key)
+│   │   ├── ZenImage.tsx        # Ambient image frame with subtle grain
+│   │   └── ZoomImage.tsx       # Smooth hover-zoom container
+│   ├── context/                # Global React contexts (CartContext, CurrencyContext)
 │   ├── data/                   # Single sources of truth (menu, products, journal, site)
-│   │   ├── menu.js             # 44 dishes & drinks with reviews, ingredients, allergens
+│   │   ├── menu.ts             # 44 dishes & drinks with reviews, ingredients, allergens
 │   │   ├── menuTypes.ts        # Strict TypeScript interfaces for menu items & reviews
-│   │   ├── products.js         # Single-origin coffee beans & zakka merchandise
-│   │   ├── journal.js          # Journal posts, brewing guides & categories
-│   │   └── site.js             # Operating hours, coordinates, address, social links
+│   │   ├── products.ts         # Single-origin coffee beans & zakka merchandise
+│   │   ├── journal.ts          # Journal posts, brewing guides & categories
+│   │   ├── legal.ts            # Legal policies, privacy, terms, and cookie notices
+│   │   └── site.ts             # Operating hours, coordinates, address, social links
+│   ├── hooks/                  # Custom React hooks (useCafeTime, use-mobile, use-size)
 │   ├── lib/                    # Core application libraries
-│   │   ├── auth.js             # Client-side session and auth storage
-│   │   ├── unsplash.js         # Unsplash image integration & photo map
+│   │   ├── auth.ts             # Client-side session and auth storage
+│   │   ├── orders.ts           # Order creation, calculation, and persistence
+│   │   ├── seigaiha.ts         # Geometric Seigaiha SVG wave pattern generator
+│   │   ├── unsplash.ts         # Unsplash image integration & photo map
 │   │   └── chat/               # AI Chat engine
 │   │       ├── intentMatcher.ts    # Fuzzy intent and keyword scoring engine
 │   │       ├── knowledge.ts        # Menu, hours, policies, & recommendation queries
@@ -113,20 +120,31 @@ shizuka-cafe/
 │   │       ├── calendar.ts         # Client-side .ics file generator
 │   │       └── providers/          # Pluggable Chat Providers (DemoProvider, LiveProvider)
 │   ├── pages/                  # Top-level page routes
-│   │   ├── Home.jsx            # Hero, counter picks, room, kind words, values
-│   │   ├── Menu.jsx            # Redesigned menu with tabs, filters, and modal
-│   │   ├── Shop.jsx            # Roastery and zakka product catalogue
-│   │   ├── ProductDetail.jsx   # Bean tasting notes, roast meter, photo swiper
-│   │   ├── Journal.jsx         # Editorial articles & brewing guides
-│   │   ├── JournalArticle.jsx  # Rich article reader with pull quotes
-│   │   ├── Visit.jsx           # Location, transit hints, interactive Google Maps
-│   │   ├── Reservations.jsx    # Table booking experience
-│   │   ├── Cart.jsx            # Detailed shopping cart review
-│   │   ├── Checkout.jsx        # Step-by-step guest checkout flow
-│   │   ├── Account.jsx         # Customer profile, past orders, saved items
-│   │   └── Admin.jsx           # Order metrics, inventory, table seating manager
-│   ├── App.jsx                 # Application routes & layout wrapper
+│   │   ├── Home.tsx            # Hero, counter picks, room, kind words, values
+│   │   ├── Menu.tsx            # Redesigned menu with tabs, filters, and modal
+│   │   ├── Shop.tsx            # Roastery and zakka product catalogue
+│   │   ├── ProductDetail.tsx   # Bean tasting notes, roast meter, photo swiper
+│   │   ├── Journal.tsx         # Editorial articles & brewing guides
+│   │   ├── JournalArticle.tsx  # Rich article reader with pull quotes
+│   │   ├── Visit.tsx           # Location, transit hints, interactive Google Maps
+│   │   ├── Reservations.tsx    # Table booking experience
+│   │   ├── Cart.tsx            # Detailed shopping cart review
+│   │   ├── Checkout.tsx        # Step-by-step guest checkout flow
+│   │   ├── OrderConfirmation.tsx # Post-checkout receipt and tracker
+│   │   ├── Account.tsx         # Customer profile, past orders, saved items
+│   │   ├── Admin.tsx           # Order metrics, inventory, table seating manager
+│   │   ├── Login.tsx           # User authentication
+│   │   ├── Register.tsx        # Registration with OTP verification
+│   │   ├── ForgotPassword.tsx  # Password recovery flow
+│   │   ├── ResetPassword.tsx   # Password reset flow
+│   │   └── PageNotFound.tsx    # Zen 404 page with return navigation
+│   ├── types/                  # Global application TypeScript declarations
+│   ├── App.tsx                 # Application routes & layout wrapper
+│   ├── main.tsx                # Application DOM entrypoint
 │   └── index.css               # Design tokens, typography variables, paper grain
+├── tsconfig.json               # TypeScript compiler configuration
+├── tsconfig.node.json          # Node TypeScript configuration
+├── eslint.config.js            # Flat ESLint configuration with typescript-eslint
 ├── tailwind.config.js          # Tailwind theme configuration
 ├── vite.config.js              # Vite bundler configuration & path aliases (@/ -> ./src)
 └── package.json                # Project dependencies & scripts
@@ -188,7 +206,7 @@ The chat assistant is designed around a decoupled **Provider Pattern** (`ChatPro
 ### Current Mode: Demo Mode (Default)
 In default operation (`VITE_CHAT_MODE=demo`):
 - All queries are scored by a deterministic keyword & phrase matching engine (`src/lib/chat/intentMatcher.ts`).
-- Answers are sourced directly from the single source of truth data files (`menu.js`, `products.js`, `site.js`).
+- Answers are sourced directly from the single source of truth data files (`menu.ts`, `products.ts`, `site.ts`).
 - Supports complex contextual questions:
   - *"What's for breakfast?"* &rarr; Returns morning offerings (7:30–11:00 AM) and Tamago Sando card.
   - *"Something vegetarian"* &rarr; Identifies vegetarian options and returns Mushroom Udon card.
@@ -228,7 +246,10 @@ To connect a live model:
 
 ---
 
-## 📜 License
+## 📜 License & Copyright
 
-Distributed under the MIT License. See `LICENSE` for more details.
-All brand designs, craft assets, and Japanese café concept created for the Shizuka Café portfolio experience.
+Copyright &copy; 2026 **John Romeo Galan** ([jrbgalan@gmail.com](mailto:jrbgalan@gmail.com)). All rights reserved.
+
+This project is open-source and licensed under the [MIT License](LICENSE).
+
+All brand concepts, aesthetic tokens, craft assets, and Japanese café designs were created by **John Romeo Galan** for the Shizuka Café digital experience.

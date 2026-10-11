@@ -3,16 +3,24 @@ import pluginJs from "@eslint/js";
 import pluginReact from "eslint-plugin-react";
 import pluginReactHooks from "eslint-plugin-react-hooks";
 import pluginUnusedImports from "eslint-plugin-unused-imports";
+import tseslint from "typescript-eslint";
 
-export default [
+export default tseslint.config(
+  {
+    ignores: [
+      "dist/**/*",
+      "node_modules/**/*",
+      "src/lib/**/*",
+      "src/components/ui/**/*",
+      "*.config.js"
+    ],
+  },
+  pluginJs.configs.recommended,
+  ...tseslint.configs.recommended,
   {
     files: [
-      "src/components/**/*.{js,mjs,cjs,jsx}",
-      "src/pages/**/*.{js,mjs,cjs,jsx}",
-      "src/Layout.jsx",
+      "src/**/*.{js,mjs,cjs,jsx,ts,tsx}",
     ],
-    ignores: ["src/lib/**/*", "src/components/ui/**/*"],
-    ...pluginJs.configs.recommended,
     ...pluginReact.configs.flat.recommended,
     languageOptions: {
       globals: globals.browser,
@@ -36,6 +44,9 @@ export default [
     },
     rules: {
       "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/ban-ts-comment": "off",
       "react/jsx-uses-vars": "error",
       "react/jsx-uses-react": "error",
       "unused-imports/no-unused-imports": "error",
@@ -56,5 +67,5 @@ export default [
       ],
       "react-hooks/rules-of-hooks": "error",
     },
-  },
-];
+  }
+);
