@@ -8,6 +8,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS%20v4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer%20Motion-11.18-0055FF?style=flat-square&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 [![Google Maps](https://img.shields.io/badge/Google%20Maps-Zero%20API%20Key-4285F4?style=flat-square&logo=googlemaps&logoColor=white)](https://maps.google.com/)
+[![Vercel](https://img.shields.io/badge/Deployed%20with-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)](https://vercel.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 
 ---
@@ -196,6 +197,14 @@ npm run build
 # Preview production build locally
 npm run preview
 ```
+
+### 🌐 Live Deployment (Vercel)
+
+The repository includes a pre-configured [`vercel.json`](vercel.json) optimized for Vite single-page application (SPA) routing:
+
+1. Import this repository in [Vercel](https://vercel.com/).
+2. Vercel automatically detects the Vite framework with output directory `dist`.
+3. Push to `main` for automatic continuous deployments.
 
 ---
 
